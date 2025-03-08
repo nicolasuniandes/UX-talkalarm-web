@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Alarm</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="home.html">TalkAlarm</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="home.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="alarmas.html">Alarmas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="calendario.html">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="asistentes.html">Asistentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="reportes.html">Reportes</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="navbar-text" onclick="openPopup()" style="cursor: pointer;">
+                <img src="static/talkalarm-user-icon.png" alt="User" style="height: 50px;">
+            </span>
+        </div>
+    </nav>
+
+    <main id="alarms-content">
+        <h2>Configura alarmas para tus diferentes dispositivos</h2>
+    
+        <div class="modal-container" id="newAlarmModal" style="display: none;">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="modalDeviceTitle"></h3>
+                    <button class="close-modal">×</button>
+                </div>
+                <div class="modal-content">
+                    <div class="input-group">
+                        <label for="alarmTime">Time:</label>
+                        <input type="time" id="alarmTime" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="alarmDate">Date:</label>
+                        <input type="date" id="alarmDate" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="assistantToggle">Activate Assistant:</label>
+                        <label class="switch">
+                            <input type="checkbox" id="assistantToggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <button class="save-alarm">Save Alarm</button>
+                </div>
+            </div>
+        </div>
+        <div class="devices-grid">
+            <div class="device-card">
+                <h3>Galaxy S21</h3>
+                <div class="alarms-list">
+                    <p class="no-alarms">No registra alarmas para este dispositivo</p>
+                </div>
+                <button class="add-alarm">+</button>
+            </div>
+    
+            <div class="device-card">
+                <h3>Ipad Mini</h3>
+                <div class="alarms-list">
+                    <p class="no-alarms">No registra alarmas para este dispositivo</p>
+                </div>
+                <button class="add-alarm">+</button>
+            </div>
+    
+            <div class="device-card">
+                <h3>Amazon Alexa</h3>
+                <div class="alarms-list">
+                    <p class="no-alarms">No registra alarmas para este dispositivo</p>
+                </div>
+                <button class="add-alarm">+</button>
+            </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

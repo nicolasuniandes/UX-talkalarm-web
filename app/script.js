@@ -1,3 +1,236 @@
+function openPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.style.borderRadius = '10px';
+    popup.innerHTML = `
+        <div class="popup-content" style="border-radius: 10px; padding: 0 20px; min-width: 500px;">
+            <span class="close-popup" style="font-size: 24px; position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</span>
+            <h2 style="font-size: 24px; padding-top: 20px;">Log in</h2>
+            <form style="display: flex; flex-direction: column; align-items: center;">
+                <input type="email" id="email" name="email" required placeholder="correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <p style="text-align: left; margin-bottom: 16px; color: #212529;font-size: 12px; width: 100%;">¿Olvidó su contraseña?</p>
+                <button type="submit" style="background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px;font-size: 22px;">Log in</button>
+            </form>
+            <p style="text-align: left; margin-top: 16px; color: #212529;font-size: 12px;">¿No tienes cuenta? <a href="#" class="sign-up-link">Sign up</a></p>
+            <hr style="margin: 16px 0;">
+            <p style="text-align: center; margin: 16px 0;">o ingresa con</p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <img src="./static/google-image.png" alt="Google" style="width: 69px; height: 78px; cursor: pointer;">
+                <img src="./static/facebook.image.png" alt="Facebook" style="width: 69px; height: 78px; cursor: pointer;">
+            </div>
+        </div>
+    `;
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = 'white';
+    popup.style.padding = '20px';
+    popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    popup.style.zIndex = '1000';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.zIndex = '999';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+    document.body.appendChild(popup);
+
+    const closePopup = popup.querySelector('.close-popup');
+    closePopup.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+            overlay.remove();
+        }
+    });
+
+    const signUpLink = popup.querySelector('.sign-up-link');
+    signUpLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.remove();
+        overlay.remove();
+        openSignUpPopup();
+    });
+}
+
+function openSignUpPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.style.borderRadius = '10px';
+    popup.innerHTML = `
+        <div class="popup-content" style="border-radius: 10px; padding: 0 20px; min-width: 500px;">
+            <span class="close-popup" style="font-size: 24px; position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</span>
+            <h2 style="font-size: 24px; padding-top: 20px;">Sign up</h2>
+            <form style="display: flex; flex-direction: column; align-items: center;">
+                <input type="email" id="email" name="email" required placeholder="correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="confirma contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <button type="submit" style="margin:40px 0; background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px;font-size: 22px;">Sign up</button>
+            </form>
+        </div>
+    `;
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = 'white';
+    popup.style.padding = '20px';
+    popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    popup.style.zIndex = '1000';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.zIndex = '999';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+    document.body.appendChild(popup);
+
+    const closePopup = popup.querySelector('.close-popup');
+    closePopup.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+            overlay.remove();
+        }
+    });
+
+    const logInLink = popup.querySelector('.log-in-link');
+    logInLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.remove();
+        overlay.remove();
+        openPopup();
+    });
+}
+
+function openAssistantPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.style.borderRadius = '10px';
+    popup.innerHTML = `
+    <span class="close-popup" style="font-size: 24px; position: absolute; top: 20px; right: 20px; cursor: pointer;">&times;</span>
+    <h2 style="font-size: 24px; padding-top: 10px;">Configuración de asistente</h2>
+    <hr style="border: 0.2px solid black; margin: 10px 0;">
+    <div class="popup-content" style="border-radius: 10px; padding: 0 20px; min-width: 390px;">
+        <h2 style="font-size: 16px; padding-top: 20px; margin-top:10px;"><strong>Configuración de asistente</strong></h2>
+        <input placeholder="Nombre" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                record_voice_over
+                </span>
+                <p for="assistantVoice" style="margin-left: 8px; margin-top: 15px;">Voz del asistente:</p>
+            </div>
+            <select id="assistantVoice" name="assistantVoice" style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 110px; display: block;">
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+            </select>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                speed
+                </span>
+                <p for="assistantSpeed" style="margin-left: 8px; margin-top: 15px;">Velocidad del habla:</p>
+            </div>
+            <input type="range" id="assistantSpeed" name="assistantSpeed" min="0" max="100" value="50" style="accent-color: #38398f; color: #38398f; width: 100%; max-width:100px; background: #38398f;">
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                voice_selection
+                </span>
+                <p for="assistantTone" style="margin-left: 8px; margin-top: 15px;">Tono de voz:</p>
+            </div>
+            <select id="assistantTone" name="assistantTone" style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 110px; display: block;">
+                <option value="bajo">Bajo</option>
+                <option value="medio">Medio</option>
+                <option value="alto">Alto</option>
+            </select>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <button type="submit" style="margin:20px 0; background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px;font-size: 14px;">Guardar</button>
+        </div>
+    </div>
+    `;
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = 'white';
+    popup.style.padding = '20px';
+    popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    popup.style.zIndex = '1000';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.zIndex = '999';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+    document.body.appendChild(popup);
+
+    const closePopup = popup.querySelector('.close-popup');
+    closePopup.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+            overlay.remove();
+        }
+    });
+
+    const signUpLink = popup.querySelector('.sign-up-link');
+    signUpLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.remove();
+        overlay.remove();
+        openSignUpPopup();
+    });
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('newAlarmModal');

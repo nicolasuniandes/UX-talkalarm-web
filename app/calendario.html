@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Alarm</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="home.html">TalkAlarm</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="home.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="alarmas.html">Alarmas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="calendario.html">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="asistentes.html">Asistentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="reportes.html">Reportes</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="navbar-text" onclick="openPopup()" style="cursor: pointer;">
+                <img src="static/talkalarm-user-icon.png" alt="User" style="height: 50px;">
+            </span>
+        </div>
+    </nav>
+
+    <main id="calendar-content">
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button class="add-event">+ Add event</button>
+            </div>
+            <div class="calendar-navigation">
+                <div class="month-nav">
+                    <button class="nav-btn">&#8249;</button>
+                    <span>Aug</span>
+                    <button class="nav-btn">&#8250;</button>
+                </div>
+                <div class="year-nav">
+                    <button class="nav-btn">&#8249;</button>
+                    <span>2025</span>
+                    <button class="nav-btn">&#8250;</button>
+                </div>
+            </div>
+
+            <div class="calendar-view">
+                <div class="mini-calendar">
+                    <div class="calendar-grid">
+                        <div class="weekdays">
+                            <span>S</span><span>M</span><span>T</span><span>W</span>
+                            <span>T</span><span>F</span><span>S</span>
+                        </div>
+                        <div class="days">
+                            <!-- Calendar days will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="calendar-integrations">
+                        <label><input type="checkbox" checked> TalkAlarm Calendar</label>
+                        <label><input type="checkbox" checked> Google Calendar</label>
+                        <label><input type="checkbox" checked> Outlook Calendar</label>
+                    </div>
+                </div>
+
+                <div class="week-view">
+                    <div class="timezone">GMT +05</div>
+                    <div class="week-header">
+                        <div class="time-column"></div>
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="week-grid">
+                        <div class="time-column">
+                            <div class="hour">9:00</div>
+                            <div class="hour">10:00</div>
+                            <div class="hour">11:00</div>
+                            <div class="hour">12:00</div>
+                            <div class="hour">13:00</div>
+                            <div class="hour">14:00</div>
+                            <div class="hour">15:00</div>
+                            <div class="hour">16:00</div>
+                            <div class="hour">17:00</div>
+                        </div>
+                        <div class="day-column"></div>
+                        <div class="day-column">
+                            <div class="event talkalarm-event" style="top: 60px; height: 90px;">
+                                <div class="event-title">Daily Standup</div>
+                                <div class="event-source">TalkAlarm Calendar</div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="event google-event" style="top: 180px; height: 60px;">
+                                <div class="event-title">Team Meeting</div>
+                                <div class="event-source">Google Calendar</div>
+                            </div>
+                        </div>
+                        <div class="day-column"></div>
+                        <div class="day-column">
+                            <div class="event outlook-event" style="top: 240px; height: 120px;">
+                                <div class="event-title">Project Review</div>
+                                <div class="event-source">Outlook Calendar</div>
+                            </div>
+                        </div>
+                        <div class="day-column"></div>
+                        <div class="day-column"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>

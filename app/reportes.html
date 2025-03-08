@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk Alarm</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="home.html">TalkAlarm</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active text-white" aria-current="page" href="home.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="alarmas.html">Alarmas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="calendario.html">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="asistentes.html">Asistentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="reportes.html">Reportes</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="navbar-text" onclick="openPopup()" style="cursor: pointer;">
+                <img src="static/talkalarm-user-icon.png" alt="User" style="height: 50px;">
+            </span>
+        </div>
+    </nav>
+
+    <main id="reports-content">
+        <div class="reports-container">
+            <div class="report-section emotions">
+                <h2>Registro de emociones</h2>
+                <div class="calendar-section">
+                    <div class="calendar-wrapper">
+                        <div class="calendar-navigation">
+                            <div class="nav-group">
+                                <button class="nav-btn">‹</button>
+                                <span>Ago</span>
+                                <button class="nav-btn">›</button>
+                            </div>
+                            <div class="nav-group">
+                                <button class="nav-btn">‹</button>
+                                <span>2025</span>
+                                <button class="nav-btn">›</button>
+                            </div>
+                        </div>
+                        <div class="calendar">
+                            <div class="weekdays">
+                                <span>S</span><span>M</span><span>T</span><span>W</span>
+                                <span>T</span><span>F</span><span>S</span>
+                            </div>
+                            <div class="days">
+                                <span class="prev-month">26</span>
+                                <span class="prev-month">27</span>
+                                <span class="prev-month">28</span>
+                                <span class="prev-month">29</span>
+                                <span class="prev-month">30</span>
+                                <span class="prev-month">31</span>
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                                <span>6</span>
+                                <span>7</span>
+                                <span>8</span>
+                                <span>9</span>
+                                <span>10</span>
+                                <span>11</span>
+                                <span>12</span>
+                                <span>13</span>
+                                <span>14</span>
+                                <span>15</span>
+                                <span>16</span>
+                                <span class="selected">17</span>
+                                <span>18</span>
+                                <span>19</span>
+                                <span>20</span>
+                                <span>21</span>
+                                <span>22</span>
+                                <span>23</span>
+                                <span>24</span>
+                                <span>25</span>
+                                <span>26</span>
+                                <span>27</span>
+                                <span>28</span>
+                                <span>29</span>
+                                <span>30</span>
+                                <span class="next-month">1</span>
+                                <span class="next-month">2</span>
+                                <span class="next-month">3</span>
+                                <span class="next-month">4</span>
+                                <span class="next-month">5</span>
+                                <span class="next-month">6</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="monthly-overview">
+                        <h3>Overview Mensual - emociones</h3>
+                        <div class="donut-chart-container">
+                            <div class="donut-chart"></div>
+                            <div class="emotions-legend">
+                                <div class="emotion-item"><span class="dot descansado"></span>Descansado 19%</div>
+                                <div class="emotion-item"><span class="dot mal-humor"></span>Mal humor 22%</div>
+                                <div class="emotion-item"><span class="dot cansado"></span>Cansado 17%</div>
+                                <div class="emotion-item"><span class="dot feliz"></span>Feliz 42%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="report-section sleep">
+                <h2>Registro de horas de sueño</h2>
+                <div class="overview-section">
+                    <div class="weekly-sleep">
+                        <div class="overview-header">
+                            <h3>Overview Semanal - sueño</h3>
+                            <div class="date-navigation">
+                                <button>‹</button>
+                                <span>10 ago - 16 ago</span>
+                                <button>›</button>
+                                <button>‹</button>
+                                <span>2025</span>
+                                <button>›</button>
+                            </div>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="chart-area"></div>
+                            <div class="feedback">
+                                <span class="emoji">😊</span>
+                                <p>¡Lo estás haciendo genial!</p>
+                                <p class="detail">Dormiste 6/7 días la meta de sueño</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="yearly-sleep">
+                        <div class="overview-header">
+                            <h3>Overview Anual - sueño</h3>
+                            <div class="date-navigation">
+                                <button>‹</button>
+                                <span>2025</span>
+                                <button>›</button>
+                            </div>
+                        </div>
+                        <div class="line-chart">
+                            <div class="chart-area"></div>
+                            <div class="feedback">
+                                <span class="emoji">😊</span>
+                                <p>¡Lo estás haciendo genial!</p>
+                                <p class="detail">11.2% más alto que tu promedio de horas de sueño</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+
