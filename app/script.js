@@ -386,12 +386,19 @@ document.addEventListener('DOMContentLoaded', () => {
         feature.style.cursor = 'pointer';
         feature.addEventListener('click', () => {
             const section = feature.dataset.section;
-            const correspondingLink = Array.from(navLinks).find(link => link.textContent === section);
-            if (correspondingLink) {
-                correspondingLink.click();
+            
+            if (section === 'Alarmas') {
+                window.location.href = 'alarmas.html';
+            } else if (section === 'Calendario') {
+                window.location.href = 'calendario.html';
+            } else if (section === 'Asistentes') {
+                window.location.href = 'asistentes.html';
+            } else if (section === 'Reportes') {
+                window.location.href = 'reportes.html';
             }
         });
     });
+
     const homeContent = document.getElementById('home-content');
     const alarmsContent = document.getElementById('alarms-content');
 
