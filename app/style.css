@@ -106,6 +106,7 @@ main {
   border-radius: 0.5rem;
   background: white;
   transition: transform 0.2s;
+  cursor: pointer;
 }
 
 .feature:hover {
