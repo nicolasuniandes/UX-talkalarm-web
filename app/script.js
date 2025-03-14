@@ -1,3 +1,160 @@
+function openAddAlarmPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.style.borderRadius = '10px';
+    popup.innerHTML = `
+    <span class="close-popup" style="font-size: 24px; position: absolute; top: 20px; right: 20px; cursor: pointer;">&times;</span>
+    <h2 style="font-size: 24px; padding-top: 10px;">Configurar alarma</h2>
+    <hr style="border: 0.2px solid black; margin: 10px 0;">
+    <div class="popup-content" style="border-radius: 10px; padding: 0 20px; min-width: 390px;">
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                alarm
+                </span>
+                <p for="assistantVoice" style="margin-left: 8px; margin-top: 15px;">Hora:</p>
+            </div>
+            <input type="time" id="alarmTime" required style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 100px; display: block;">
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                alarm
+                </span>
+                <p for="assistantVoice" style="margin-left: 8px; margin-top: 15px;">Días de repetición:</p>
+            </div>
+            <select id="assistantVoice" name="assistantVoice" style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 120px; display: block;">
+                <option value="lunes">Cada Lunes</option>
+                <option value="martes">Cada Martes</option>
+                <option value="miercoles">Cada Miércoles</option>
+                <option value="jueves">Cada Jueves</option>
+                <option value="viernes">Cada Viernes</option>
+                <option value="sabado">Cada Sábado</option>
+                <option value="domingo">Cada Domingo</option>
+            </select>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <p for="assistantVoice" style="margin-top: 15px;">Activar asistente conversacional:</p>
+            </div>
+            <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
+                <input type="checkbox" id="assistantToggle" name="activateAssistant" value="true" style="margin-right: 5px;">
+                <span></span>
+            </label>
+        </div>
+        
+        <div style="display: flex; justify-content: center;">
+            <button id="saveAlarm" style="margin:20px 0; background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px; font-size: 14px;">Guardar</button>
+        </div>
+    </div>
+    `;
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = 'white';
+    popup.style.padding = '20px';
+    popup.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.5)';
+    popup.style.zIndex = '1000';
+
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    overlay.style.zIndex = '999';
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+    document.body.appendChild(popup);
+
+    const closePopup = popup.querySelector('.close-popup');
+    closePopup.addEventListener('click', () => {
+        popup.remove();
+        overlay.remove();
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.remove();
+            overlay.remove();
+        }
+    });
+
+    const saveButton = popup.querySelector('#saveAlarm');
+    saveButton.addEventListener('click', () => {
+        const time = popup.querySelector('#alarmTime').value;
+        const assistantEnabled = popup.querySelector('#assistantToggle').checked;
+        
+        if (!time) {
+            alert('Por favor seleccione una hora para la alarma');
+            return;
+        }
+        popup.remove();
+        overlay.remove();
+    });
+}
+
+function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
+    const alarmsList = deviceCard.querySelector('.alarms-list');
+    
+    const noAlarmsMsg = alarmsList.querySelector('.no-alarms');
+    if (noAlarmsMsg) {
+        noAlarmsMsg.remove();
+    }
+
+    const timeObj = new Date(`2000-01-01T${time}`);
+    const formattedTime = timeObj.toLocaleTimeString('es-ES', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    });
+    
+    const alarmItem = document.createElement('div');
+    alarmItem.className = 'alarm-item';
+    
+    const repeatText = repeatDays.length > 0 ? repeatDays.join(', ') : 'No se repite';
+    
+    alarmItem.innerHTML = `
+        <div class="alarm-info">
+            <span>${formattedTime}</span>
+            <div class="alarm-details">${assistantEnabled ? 'con' : 'sin'} asistente - Repite: ${repeatText}</div>
+        </div>
+        <div class="alarm-actions">
+            <button class="edit-btn">✎</button>
+            <button class="delete-btn">🗑</button>
+        </div>
+    `;
+    
+    alarmItem.querySelector('.edit-btn').addEventListener('click', function() {
+        alert('Función de edición será implementada próximamente');
+    });
+    
+    alarmItem.querySelector('.delete-btn').addEventListener('click', function() {
+        if (confirm('¿Está seguro que desea eliminar esta alarma?')) {
+            alarmItem.remove();
+            
+            if (alarmsList.children.length === 0) {
+                const noAlarmsMsg = document.createElement('p');
+                noAlarmsMsg.className = 'no-alarms';
+                noAlarmsMsg.textContent = 'No registra alarmas para este dispositivo';
+                alarmsList.appendChild(noAlarmsMsg);
+            }
+        }
+    });
+    
+    alarmsList.appendChild(alarmItem);
+}
+
 function openPopup() {
     const popup = document.createElement('div');
     popup.className = 'popup';
@@ -234,22 +391,16 @@ function openAssistantPopup() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('newAlarmModal');
-    const modalTitle = document.getElementById('modalDeviceTitle');
     let currentDeviceCard = null;
 
     document.querySelectorAll('.add-alarm').forEach(button => {
         button.addEventListener('click', (e) => {
             const deviceCard = e.target.closest('.device-card');
-            currentDeviceCard = deviceCard;
-            const deviceName = deviceCard.querySelector('h3').textContent;
-            modalTitle.textContent = `Nueva alarma - ${deviceName}`;
-            modal.style.display = 'flex';
-
-            document.getElementById('alarmTime').value = '';
-            document.getElementById('alarmDate').value = '';
-            document.getElementById('assistantToggle').checked = false;
+            currentDeviceCard = deviceCard; 
+            openAddAlarmPopup();
         });
     });
+
 
     document.querySelector('.close-modal').addEventListener('click', () => {
         modal.style.display = 'none';
