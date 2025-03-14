@@ -164,8 +164,8 @@ function openPopup() {
             <span class="close-popup" style="font-size: 24px; position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</span>
             <h2 style="font-size: 24px; padding-top: 20px;">Log in</h2>
             <form style="display: flex; flex-direction: column; align-items: center;">
-                <input type="email" id="email" name="email" required placeholder="correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
-                <input type="password" id="password" name="password" required placeholder="contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="email" id="email" name="email" required placeholder="Correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="Contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
                 <p style="text-align: left; margin-bottom: 16px; color: #212529;font-size: 12px; width: 100%;">¿Olvidó su contraseña?</p>
                 <button type="submit" style="background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px;font-size: 22px;">Log in</button>
             </form>
@@ -235,11 +235,18 @@ function openSignUpPopup() {
             <span class="close-popup" style="font-size: 24px; position: absolute; top: 10px; right: 10px; cursor: pointer;">&times;</span>
             <h2 style="font-size: 24px; padding-top: 20px;">Sign up</h2>
             <form style="display: flex; flex-direction: column; align-items: center;">
-                <input type="email" id="email" name="email" required placeholder="correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
-                <input type="password" id="password" name="password" required placeholder="contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
-                <input type="password" id="password" name="password" required placeholder="confirma contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="email" id="email" name="email" required placeholder="Correo" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="Contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
+                <input type="password" id="password" name="password" required placeholder="Confirma contraseña" style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 16px;">
                 <button type="submit" style="margin:40px 0; background-color: #38388E; color: white; padding: 10px 20px; border: none; border-radius: 100px; cursor: pointer; width: 153px;font-size: 22px;">Sign up</button>
             </form>
+            <p style="text-align: center; margin-top: 16px; color: #212529;font-size: 12px;">Volver al <a href="#" class="log-in-link">Log in</a></p>
+            <hr style="margin: 16px 0;">
+            <p style="text-align: center; margin: 16px 0;">o registrate con</p>
+            <div style="display: flex; justify-content: center; gap: 16px;">
+                <img src="./static/google-image.png" alt="Google" style="width: 69px; height: 78px; cursor: pointer;">
+                <img src="./static/facebook.image.png" alt="Facebook" style="width: 69px; height: 78px; cursor: pointer;">
+            </div>
         </div>
     `;
     popup.style.position = 'fixed';
@@ -385,6 +392,14 @@ function openAssistantPopup() {
         popup.remove();
         overlay.remove();
         openSignUpPopup();
+    });
+
+    const logInLink = popup.querySelector('.log-in-link');
+    logInLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        popup.remove();
+        overlay.remove();
+        openPopup();
     });
 }
 
