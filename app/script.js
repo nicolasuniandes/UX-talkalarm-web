@@ -7,50 +7,42 @@ function openAddAlarmPopup() {
     <h2 style="font-size: 24px; padding-top: 10px;">Configurar alarma</h2>
     <hr style="border: 0.2px solid black; margin: 10px 0;">
     <div class="popup-content" style="border-radius: 10px; padding: 0 20px; min-width: 390px;">
-        <div style="margin-top: 20px;">
-            <label for="alarmTime" style="display: block; margin-bottom: 8px;">Hora:</label>
-            <input type="time" id="alarmTime" required style="border: none; border-bottom: 1px solid #212529; width: 100%; padding: 8px; margin-bottom: 20px;">
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <label style="display: block; margin-bottom: 10px;">Repite:</label>
-            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Lun" style="margin-right: 5px;">
-                    <span>Lun</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Mar" style="margin-right: 5px;">
-                    <span>Mar</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Mie" style="margin-right: 5px;">
-                    <span>Mie</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Jue" style="margin-right: 5px;">
-                    <span>Jue</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Vie" style="margin-right: 5px;">
-                    <span>Vie</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Sab" style="margin-right: 5px;">
-                    <span>Sab</span>
-                </label>
-                <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
-                    <input type="checkbox" name="repeatDay" value="Dom" style="margin-right: 5px;">
-                    <span>Dom</span>
-                </label>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                alarm
+                </span>
+                <p for="assistantVoice" style="margin-left: 8px; margin-top: 15px;">Hora:</p>
             </div>
+            <input type="time" id="alarmTime" required style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 100px; display: block;">
         </div>
-        
-        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
-            <label for="assistantToggle" style="margin-right: 10px;">Activar asistente:</label>
-            <label class="switch">
-                <input type="checkbox" id="assistantToggle">
-                <span class="slider round"></span>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <span class="material-symbols-outlined" style="color: #38398f;">
+                alarm
+                </span>
+                <p for="assistantVoice" style="margin-left: 8px; margin-top: 15px;">Días de repetición:</p>
+            </div>
+            <select id="assistantVoice" name="assistantVoice" style="border: none; border-bottom: 1px solid #38398f; color: #38398f; padding: 8px; max-width: 120px; display: block;">
+                <option value="lunes">Cada Lunes</option>
+                <option value="martes">Cada Martes</option>
+                <option value="miercoles">Cada Miércoles</option>
+                <option value="jueves">Cada Jueves</option>
+                <option value="viernes">Cada Viernes</option>
+                <option value="sabado">Cada Sábado</option>
+                <option value="domingo">Cada Domingo</option>
+            </select>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center;">
+                <p for="assistantVoice" style="margin-top: 15px;">Activar asistente conversacional:</p>
+            </div>
+            <label style="display: inline-flex; align-items: center; margin-right: 10px; margin-bottom: 10px;">
+                <input type="checkbox" id="assistantToggle" name="activateAssistant" value="true" style="margin-right: 5px;">
+                <span></span>
             </label>
         </div>
         
@@ -98,43 +90,28 @@ function openAddAlarmPopup() {
         }
     });
 
-    // Handle save button click
     const saveButton = popup.querySelector('#saveAlarm');
     saveButton.addEventListener('click', () => {
         const time = popup.querySelector('#alarmTime').value;
         const assistantEnabled = popup.querySelector('#assistantToggle').checked;
         
-        // Get selected days
-        const selectedDays = [];
-        popup.querySelectorAll('input[name="repeatDay"]:checked').forEach(checkbox => {
-            selectedDays.push(checkbox.value);
-        });
-        
         if (!time) {
             alert('Por favor seleccione una hora para la alarma');
             return;
         }
-        
-        // Add alarm to the current device card (from the global state)
-        if (currentDeviceCard) {
-            addAlarmToDevice(currentDeviceCard, time, selectedDays, assistantEnabled);
-            popup.remove();
-            overlay.remove();
-        }
+        popup.remove();
+        overlay.remove();
     });
 }
 
-// Function to add the alarm to a device card
 function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
     const alarmsList = deviceCard.querySelector('.alarms-list');
     
-    // Remove "no alarms" message if it exists
     const noAlarmsMsg = alarmsList.querySelector('.no-alarms');
     if (noAlarmsMsg) {
         noAlarmsMsg.remove();
     }
-    
-    // Format time for display (convert from 24h to 12h format)
+
     const timeObj = new Date(`2000-01-01T${time}`);
     const formattedTime = timeObj.toLocaleTimeString('es-ES', {
         hour: 'numeric',
@@ -142,11 +119,9 @@ function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
         hour12: true
     });
     
-    // Create alarm item
     const alarmItem = document.createElement('div');
     alarmItem.className = 'alarm-item';
     
-    // Format repeat days
     const repeatText = repeatDays.length > 0 ? repeatDays.join(', ') : 'No se repite';
     
     alarmItem.innerHTML = `
@@ -160,7 +135,6 @@ function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
         </div>
     `;
     
-    // Add event listeners to buttons
     alarmItem.querySelector('.edit-btn').addEventListener('click', function() {
         alert('Función de edición será implementada próximamente');
     });
@@ -169,7 +143,6 @@ function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
         if (confirm('¿Está seguro que desea eliminar esta alarma?')) {
             alarmItem.remove();
             
-            // Add back "no alarms" message if no alarms left
             if (alarmsList.children.length === 0) {
                 const noAlarmsMsg = document.createElement('p');
                 noAlarmsMsg.className = 'no-alarms';
@@ -179,7 +152,6 @@ function addAlarmToDevice(deviceCard, time, repeatDays, assistantEnabled) {
         }
     });
     
-    // Add to alarms list
     alarmsList.appendChild(alarmItem);
 }
 
@@ -419,16 +391,16 @@ function openAssistantPopup() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('newAlarmModal');
-    const modalTitle = document.getElementById('modalDeviceTitle');
     let currentDeviceCard = null;
 
     document.querySelectorAll('.add-alarm').forEach(button => {
         button.addEventListener('click', (e) => {
             const deviceCard = e.target.closest('.device-card');
-            currentDeviceCard = deviceCard; // Set global state
+            currentDeviceCard = deviceCard; 
             openAddAlarmPopup();
         });
     });
+
 
     document.querySelector('.close-modal').addEventListener('click', () => {
         modal.style.display = 'none';
